@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.dental.records.model.User;
 import com.dental.records.service.UserService;
 
 @RestController
@@ -26,7 +27,10 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-
+	@PostMapping("/adminCreate")
+    public User makeAdmin(@RequestBody User user) {
+    	return userService.adminAccount(user);
+    }
     
     @PostMapping("/verify")
     public ResponseEntity<String> verifyUser(@RequestParam("email") String email,

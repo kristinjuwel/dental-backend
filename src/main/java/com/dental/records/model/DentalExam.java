@@ -25,7 +25,7 @@ public class DentalExam {
     @Column(name = "last_name", length = 30)
     private String lastName;
     
-    @Column(name = "birthday", nullable = false)
+    @Column(name = "birthday")
     private Date birthday;
 
     @Column(name = "unit_assign", length = 50)
@@ -51,6 +51,9 @@ public class DentalExam {
 
     @Column(name = "initial_date")
     private Date purposeDate;
+    
+    @Column(name = "checkup_date")
+    private Date checkupDate;
     
     @Column(name = "training_date")
     private Date trainingDate;
@@ -102,11 +105,14 @@ public class DentalExam {
     	
     }
 
+	
+
 	public DentalExam(Long examId, String rank, String firstName, String middleName, String lastName, Date birthday,
 			String unitAssign, String sponsor, String address, String contactNumber, byte[] picture, String region,
-			String purpose, Date purposeDate, Date trainingDate, Date promotionDate, byte[] dentImage, String calculus,
-			String remarks, String complaint, String medHist, String bp, Long dentistId, byte[] dentSign,
-			byte[] patSign, String chiefName, byte[] chiefSign, String completionStatus, Dentist dentist) {
+			String purpose, Date purposeDate, Date checkupDate, Date trainingDate, Date promotionDate, byte[] dentImage,
+			String calculus, String remarks, String complaint, String medHist, String bp, Long dentistId,
+			byte[] dentSign, byte[] patSign, String chiefName, byte[] chiefSign, String completionStatus,
+			Dentist dentist) {
 		super();
 		this.examId = examId;
 		this.rank = rank;
@@ -122,6 +128,7 @@ public class DentalExam {
 		this.region = region;
 		this.purpose = purpose;
 		this.purposeDate = purposeDate;
+		this.checkupDate = checkupDate;
 		this.trainingDate = trainingDate;
 		this.promotionDate = promotionDate;
 		this.dentImage = dentImage;
@@ -138,6 +145,20 @@ public class DentalExam {
 		this.completionStatus = completionStatus;
 		this.dentist = dentist;
 	}
+
+
+
+	public Date getCheckupDate() {
+		return checkupDate;
+	}
+
+
+
+	public void setCheckupDate(Date checkupDate) {
+		this.checkupDate = checkupDate;
+	}
+
+
 
 	public Long getExamId() {
 		return examId;

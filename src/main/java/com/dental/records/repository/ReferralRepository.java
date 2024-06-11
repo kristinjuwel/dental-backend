@@ -11,4 +11,5 @@ public interface ReferralRepository extends JpaRepository<Referral, Long> {
 	List<Referral> findByPatientName(String patientName);
 	List<Referral> findByDentistName(String dentistName);
 	List<Referral> findByCompletionStatus(String completionStatus);
+	Referral findByDentistIdAndExamId(Long dentistId, Long examId);
 }

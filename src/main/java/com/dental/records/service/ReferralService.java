@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,12 +41,10 @@ public class ReferralService {
 		this.renderedRepository = renderedRepository;
 	}
 	
-    private LocalDate convertToLocalDate(Date dateToConvert) {
-        return dateToConvert.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
+	private LocalDate convertToLocalDate(Date dateToConvert) {
+        return dateToConvert.toLocalDate(); // Direct conversion from java.sql.Date to java.time.LocalDate
     }
-	
+
     public int calculateAge(Date birthDate) {
         if (birthDate == null) {
             throw new IllegalArgumentException("The birthDate cannot be null");
@@ -118,6 +115,10 @@ public class ReferralService {
 	}
 	public List<Referral> findByStatus(String completionStatus){
 		return referralRepository.findByCompletionStatus(completionStatus);
+	}
+	
+	public Referral findByDentistIdAndExamId(Long dentistId, Long examId){
+		return referralRepository.findByDentistIdAndExamId(dentistId, examId);
 	}
     	
 	

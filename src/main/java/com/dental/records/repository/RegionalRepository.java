@@ -10,4 +10,5 @@ public interface RegionalRepository extends JpaRepository<Regional, Long>{
 	Regional findByRegionalId(Long regionalId);
 	List<Regional> findByRegionName(String regionName);
 	List<Regional> findByReportMonthAndReportYear(String reportMonth, String reportYear);
+	Regional findByRegionNameAndReportMonthAndReportYear(String regionName, String reportMonth, String reportYear);
 }

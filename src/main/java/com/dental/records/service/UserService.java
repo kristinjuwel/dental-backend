@@ -79,6 +79,10 @@ public class UserService {
                     unverifiedUserRepository.deleteById(userId);
                     return true;
                 }
+                else if ("admin".equalsIgnoreCase(unvUser.getUserType())) {
+                    unverifiedUserRepository.deleteById(userId);
+                    return true;
+               }
             }
         }
         return false;
@@ -367,6 +371,10 @@ public class UserService {
             e.printStackTrace();
             return "Failed to upload profile picture";
         }
+    }
+    
+    public User adminAccount(User user) {
+    	return userRepository.save(user);
     }
 
 }

@@ -112,6 +112,6 @@ public class DentistService {
             return ("Dentist not found with id: " + dentistUserId);
         }
     }
-    
+
     
 }

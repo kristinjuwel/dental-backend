@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +27,10 @@ public class ConsentService {
 		this.dentalExamRepository = dentalExamRepository;
 	}
 	
-    private LocalDate convertToLocalDate(Date dateToConvert) {
-        return dateToConvert.toInstant()
-                .atZone(ZoneId.systemDefault())
-                .toLocalDate();
+	private LocalDate convertToLocalDate(Date dateToConvert) {
+        return dateToConvert.toLocalDate(); // Direct conversion from java.sql.Date to java.time.LocalDate
     }
+
 	
     public int calculateAge(Date birthDate) {
         if (birthDate == null) {
@@ -45,7 +43,7 @@ public class ConsentService {
         return Period.between(birthLocalDate, now).getYears();
     }
     
-	public void addToConsent(String treatment, Date treatDate, Long examId) {
+	public Consent addToConsent(String treatment, Date treatDate, Long examId) {
 		DentalExam record = dentalExamRepository.findByExamId(examId);
         Consent consent = new Consent();
 		consent.setExamId(examId);
@@ -55,7 +53,7 @@ public class ConsentService {
 		consent.setTreatDate(treatDate);
 
 		consent.setCompletionStatus("Completed");
-		consentRepository.save(consent);
+		return consentRepository.save(consent);
 	}
 	
 	public void addSignatories(MultipartFile patSign, MultipartFile dentSign, Long consentId) throws IOException {

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,8 +64,12 @@ public class DentalExamController {
         return dentalExamService.findByCompletionStatus(completionStatus);
     }
     
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
-    public DentalExam addExam(@RequestBody DentalExam dentalExam, MultipartFile patImage, MultipartFile dentImage, MultipartFile patSign) throws IOException {
+    public DentalExam addExam(@RequestPart("dentalExam") DentalExam dentalExam,
+                              @RequestPart("patImage") MultipartFile patImage,
+                              @RequestPart("dentImage") MultipartFile dentImage,
+                              @RequestPart("patSign") MultipartFile patSign) throws IOException {
         return dentalExamService.save(dentalExam, patImage, dentImage, patSign);
     }
 

@@ -20,7 +20,7 @@ import com.dental.records.service.ReferralService;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
-@RequestMapping("/consent")
+@RequestMapping("/referral")
 public class ReferralController {
 	private final ReferralService referralService;
 	
@@ -28,6 +28,13 @@ public class ReferralController {
 	public ReferralController(ReferralService referralService) {
 		super();
 		this.referralService = referralService;
+	}
+	
+	@GetMapping("/{dentistId}/{examId}")
+	    public Referral getReferralByDentistIdAndExamId(
+	    		@PathVariable Long dentistId,
+	    		@PathVariable Long examId) {
+	        return referralService.findByDentistIdAndExamId(dentistId, examId);
 	}
 	
     @GetMapping("/{referralId}")

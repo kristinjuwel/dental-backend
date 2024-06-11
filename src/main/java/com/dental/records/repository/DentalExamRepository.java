@@ -14,7 +14,7 @@ public interface DentalExamRepository extends JpaRepository<DentalExam, Long>{
     DentalExam findByExamId(Long examId);
     List<DentalExam> findByFirstNameAndLastName(String firstName, String lastName);
     List<DentalExam> findByCompletionStatus(String completionStatus);
-    List<DentalExam> findByUnitAssignAndPurposeDateBetween(String unitAssign, Date startDate, Date endDate);
+    List<DentalExam> findByUnitAssignAndCheckupDateBetween(String unitAssign, Date startDate, Date endDate);
     List<DentalExam> findByPurpose(String purpose);
 
 }

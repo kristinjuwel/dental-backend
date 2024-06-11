@@ -1,5 +1,6 @@
 package com.dental.records.service;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -9,6 +10,7 @@ import java.time.ZoneId;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.dental.records.model.DentalExam;
 import com.dental.records.model.Regional;
@@ -81,7 +83,7 @@ public class RegionalService {
 	    // Convert LocalDate to Date
 	    Date start = (Date) Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 	    Date end = (Date) Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		List<DentalExam> examForm = examRepo.findByUnitAssignAndPurposeDateBetween(regionPlace, start, end);
+		List<DentalExam> examForm = examRepo.findByUnitAssignAndCheckupDateBetween(regionPlace, start, end);
 		
 		long unifOralProphylaxis = 0, unifDentalSealant = 0, unifFluorideApplication = 0, unifRestoration = 0, unifExtraction = 0, unifProsthodontics = 0, unifOtherProcedures = 0;
 	    long nonUnifOralProphylaxis = 0, nonUnifDentalSealant = 0, nonUnifFluorideApplication = 0, nonUnifRestoration = 0, nonUnifExtraction = 0, nonUnifProsthodontics = 0, nonUnifOtherProcedures = 0;
@@ -299,6 +301,19 @@ public class RegionalService {
 		return regionForm.getGrandTotal();
 	}
 	
+	public void addEntry(Regional regional) {
+		regionalRepo.save(regional);
+	}
 	
-	
+	public Regional save(Regional regional, MultipartFile staffSign, MultipartFile chiefSign) throws IOException {
+    	byte[] staffSignBytes = staffSign.getBytes();
+    	byte[] chiefSignBytes = chiefSign.getBytes();
+    	regional.setStaffSign(staffSignBytes);
+    	regional.setChiefSign(chiefSignBytes);
+    	return regionalRepo.save(regional);
+    }
+
+	public Regional getRegionalsByRegionNameAndReportMonthAndReportYear(String regionName, String reportMonth, String reportYear) {
+        return regionalRepo.findByRegionNameAndReportMonthAndReportYear(regionName, reportMonth, reportYear);
+    }
 }
