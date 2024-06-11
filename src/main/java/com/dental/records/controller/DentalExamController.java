@@ -25,7 +25,7 @@ import com.dental.records.model.DentalExam;
 import com.dental.records.service.DentalExamService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://dental-health-record.vercel.app")
 @RequestMapping("/dental")
 public class DentalExamController {
 
@@ -64,7 +64,7 @@ public class DentalExamController {
         return dentalExamService.findByCompletionStatus(completionStatus);
     }
     
-    @CrossOrigin(origins = "http://localhost:3000")
+    @CrossOrigin(origins = "https://dental-health-record.vercel.app")
     @PostMapping
     public DentalExam addExam(@RequestPart("dentalExam") DentalExam dentalExam,
                               @RequestPart("patImage") MultipartFile patImage,

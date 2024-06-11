@@ -133,14 +133,42 @@ public class UserService {
                 return "Login successful";
             } else {
                 // This is not a patient account, deny login and print an error message
-                return "Login denied: Not a patient account.";
+                return "Login denied: Not an account.";
             }
         }
 
         // If the user is not found or the password doesn't match, deny login
         return "Login denied: Invalid credentials.";
     }
-    
+    public String adminLogin(String identifier, String password) {
+        BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
+        User user = userRepository.findByUsername(identifier);
+
+        // If no user is found with the username, try to find by email
+        if (user == null) {
+            user = userRepository.findByEmail(identifier);
+        }
+
+        if (user != null && bcrypt.matches(password, user.getPassword())) {
+            if ("admin".equalsIgnoreCase(user.getUserType())) {
+                // Check if the user is marked as deleted
+                if ("deleted".equalsIgnoreCase(user.getDeletionStatus())) {
+                    return "Login denied: Account has been deleted.";
+                }
+
+                // This is a patient account, allow login
+                loggedInDentists.add(user);
+                return "Login successful";
+            } else {
+                // This is not a dentist account, deny login and print an error message
+                return "Login denied: Not a dentist account.";
+            }
+        }
+
+        // If the user is not found or the password doesn't match, deny login
+        return "Login denied: Invalid credentials.";
+    }
+	
     public String dentistlogin(String identifier, String password) {
         BCryptPasswordEncoder bcrypt = new BCryptPasswordEncoder();
         User user = userRepository.findByUsername(identifier);
@@ -187,6 +215,12 @@ public class UserService {
 	            return result; // Return the result from patientService
 	        } else if ("dentist".equalsIgnoreCase(user.getUserType())) {
 	            String result = dentistlogin(identifier, password);
+	            if (result.equals("Login successful")) {
+	                return user.getUserId().toString(); // Return username upon successful login
+	            }
+	            return result; // Return the result from dentistService
+	        } else if ("admin".equalsIgnoreCase(user.getUserType())) {
+	            String result = adminLogin(identifier, password);
 	            if (result.equals("Login successful")) {
 	                return user.getUserId().toString(); // Return username upon successful login
 	            }

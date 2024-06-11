@@ -19,7 +19,7 @@ import com.dental.records.model.ServiceRendered;
 import com.dental.records.service.ServiceRenderedService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://dental-health-record.vercel.app")
 @RequestMapping("/services")
 public class ServiceRenderedController {
 	private ServiceRenderedService renderedService;

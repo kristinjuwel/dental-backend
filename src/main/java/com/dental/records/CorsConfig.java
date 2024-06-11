@@ -9,7 +9,8 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-            .allowedOrigins("http://localhost:3000") // Add your frontend URL here
+            .allowedOrigins("http://localhost:3000")
+            .allowedOrigins("https://dental-health-record.vercel.app")// Add your frontend URL here
             .allowedMethods("GET", "POST", "PUT", "DELETE")
             .allowCredentials(true); // If you need to include cookies in the request
     }

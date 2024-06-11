@@ -18,7 +18,7 @@ import com.dental.records.model.User;
 import com.dental.records.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://dental-health-record.vercel.app")
 public class UserController {
 	private final UserService userService;
 	

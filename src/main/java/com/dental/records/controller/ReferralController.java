@@ -19,7 +19,7 @@ import com.dental.records.model.Referral;
 import com.dental.records.service.ReferralService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://dental-health-record.vercel.app")
 @RequestMapping("/referral")
 public class ReferralController {
 	private final ReferralService referralService;
