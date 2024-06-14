@@ -16,7 +16,7 @@ import com.dental.records.model.Regional;
 import com.dental.records.service.RegionalService;
 
 @RestController
-@CrossOrigin(origins = "https://dental-health-record.vercel.app")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/regional")
 public class RegionalController {
 	private final RegionalService regionalService;

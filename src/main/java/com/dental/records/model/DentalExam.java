@@ -46,7 +46,7 @@ public class DentalExam {
     @Column(name = "region", length = 30)
     private String region;
 
-    @Column(name = "purpose", length = 35)
+    @Column(name = "purpose", length = 255)
     private String purpose;
 
     @Column(name = "initial_date")

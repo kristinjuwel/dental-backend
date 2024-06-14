@@ -20,7 +20,7 @@ import com.dental.records.model.Consent;
 import com.dental.records.service.ConsentService;
 
 @RestController
-@CrossOrigin(origins = "https://dental-health-record.vercel.app")
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/consent")
 public class ConsentController {
 	private final ConsentService consentService;
@@ -46,7 +46,7 @@ public class ConsentController {
         return consentService.findByStatus(completionStatus);
     }
     
-    @CrossOrigin(origins = "https://dental-health-record.vercel.app")
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/{treatDate}/{examId}")
     public Consent AddConsentDetails(@RequestBody String treatment, @PathVariable Date treatDate, @PathVariable Long examId) {
         return consentService.addToConsent(treatment, treatDate, examId);

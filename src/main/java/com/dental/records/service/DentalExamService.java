@@ -92,4 +92,9 @@ public class DentalExamService {
     public List<DentalExam> findByCompletionStatus(String completionStatus) {
         return dentalExamRepository.findByCompletionStatus(completionStatus);
     }
+    
+    public byte[] GetDrawingById(Long examId) {
+    	DentalExam exam = dentalExamRepository.findByExamId(examId);
+    	return exam.getDentImage();
+    }
 }

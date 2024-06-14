@@ -18,7 +18,7 @@ import com.dental.records.model.User;
 import com.dental.records.service.UserService;
 
 @RestController
-@CrossOrigin(origins = "https://dental-health-record.vercel.app")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 	private final UserService userService;
 	
@@ -41,7 +41,8 @@ public class UserController {
     		return ResponseEntity.ok("Unsuccessful verification.");
     	}
     }
-	
+    @CrossOrigin(origins = "http://localhost:3000")
+
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam("identifier") String identifier,
                                         @RequestParam("password") String password) {
